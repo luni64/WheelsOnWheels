@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WheelsOnWheelsLib", "WheelsOnWheelsLib\WheelsOnWheelsLib.csproj", "{CAD66903-13EE-4EEA-9826-DC04CA5D383C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WheelsOnWheelsGUI", "WheelsOnWheelsGUI\WheelsOnWheelsGUI.csproj", "{089094F8-CAB4-4A15-BADF-53481C6F05D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAD66903-13EE-4EEA-9826-DC04CA5D383C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD66903-13EE-4EEA-9826-DC04CA5D383C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD66903-13EE-4EEA-9826-DC04CA5D383C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD66903-13EE-4EEA-9826-DC04CA5D383C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{089094F8-CAB4-4A15-BADF-53481C6F05D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{089094F8-CAB4-4A15-BADF-53481C6F05D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{089094F8-CAB4-4A15-BADF-53481C6F05D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{089094F8-CAB4-4A15-BADF-53481C6F05D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D255A83-2765-49C1-8C04-8565451C1570}
+	EndGlobalSection
+EndGlobal
