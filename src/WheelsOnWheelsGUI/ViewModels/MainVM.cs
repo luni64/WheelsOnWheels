@@ -18,11 +18,12 @@ namespace ViewModel
 
         public FarrisFuncVM farrisFuncVM { get; }
         public List<DataPoint> functionValues { get; } = new List<DataPoint>();
+        public List<string> responses { get; } = new List<string>();
       
         public MainVM()
         {
-            cmdStart = new RelayCommand(doStart, o => iFace.isOpen);
-            cmdStop = new RelayCommand(doStop, o => iFace.isOpen);
+            cmdStop = new RelayCommand((o)=>iFace.cmdStop(), o => iFace.isOpen);
+            cmdStart = new RelayCommand((o)=>iFace.cmdStart(farrisFuncVM.paramString), o => iFace.isOpen);
 
             farrisFuncVM = new FarrisFuncVM(functionValues);
 
@@ -30,7 +31,13 @@ namespace ViewModel
             {
                 iFace = new IFace();
                 iFace.connectedTeensyChanged += iFace_ConnectedTeensyChanged;
+                iFace.newResponse += iFace_newResponse;
             }
+        }
+
+        private void iFace_newResponse(object sender, string e)
+        {
+            Console.WriteLine(e);            
         }
 
         private void iFace_ConnectedTeensyChanged(object sender, EventArgs e)
@@ -42,8 +49,8 @@ namespace ViewModel
         public string connectedTeensy => iFace?.teensyID;
         public void Dispose() => iFace?.Dispose();
 
-        private void doStart(object o) => iFace.cmdStart("");
-        private void doStop(object o) => iFace.cmdStop();
+        //private void doStart(object o) => iFace.cmdStart("");
+        //private void doStop(object o) => iFace.cmdStop();
         private readonly IFace iFace;
     }
 }

@@ -5,6 +5,8 @@ using System.Management;
 
 namespace TeensySharp
 {
+    // From  https://github.com/luni64/TeensySharp
+
     public class TeensyWatcher : IDisposable
     { 
         const uint vid = 0x16C0;
