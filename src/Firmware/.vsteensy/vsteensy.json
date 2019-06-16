@@ -1,0 +1,32 @@
+{
+  "version": "1",
+  "target": "vsCode",
+  "buildSystem": "makefile",
+  "configurations": [
+    {
+      "name": "default",
+      "guid": "ef7db39a-c605-41b0-96d5-d79d9b60b6c0",
+      "setupType": "expert",
+      "boardTxtPath": "C:\\toolchain\\Teensyduino\\td_146\\boards.txt",
+      "coreBase": "C:\\toolchain\\Teensyduino\\td_146\\cores",
+      "compilerBase": "C:\\toolchain\\gcc\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32",
+      "makefileExtension": null,
+      "copyBoardTxt": false,
+      "copyCore": false,
+      "sharedLibraries": [
+        "TeensyStep",
+        "Arduino-SerialCommand"
+      ],
+      "localLibraries": [],
+      "board": {
+        "name": "Teensy 3.2 / 3.1",
+        "options": {
+          "USB Type": "Serial",
+          "CPU Speed": "96 MHz (overclock)",
+          "Optimize": "Faster",
+          "Keyboard Layout": "US English"
+        }
+      }
+    }
+  ]
+}

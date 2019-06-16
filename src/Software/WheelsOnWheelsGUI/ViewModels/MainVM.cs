@@ -19,11 +19,11 @@ namespace ViewModel
         public FarrisFuncVM farrisFuncVM { get; }
         public List<DataPoint> functionValues { get; } = new List<DataPoint>();
         public List<string> responses { get; } = new List<string>();
-      
+
         public MainVM()
         {
-            cmdStop = new RelayCommand((o)=>iFace.cmdStop(), o => iFace.isOpen);
-            cmdStart = new RelayCommand((o)=>iFace.cmdStart(farrisFuncVM.paramString), o => iFace.isOpen);
+            cmdStop = new RelayCommand(o => iFace?.cmdStop(), o => iFace?.isOpen ?? false);
+            cmdStart = new RelayCommand(o => iFace?.cmdStart(farrisFuncVM.paramString), o => iFace?.isOpen ?? false);
 
             farrisFuncVM = new FarrisFuncVM(functionValues);
 
@@ -37,20 +37,21 @@ namespace ViewModel
 
         private void iFace_newResponse(object sender, string e)
         {
-            Console.WriteLine(e);            
+            Console.WriteLine(e);
         }
 
         private void iFace_ConnectedTeensyChanged(object sender, EventArgs e)
         {
             onPropertyChanged("connectedTeensy");
-            Application.Current.Dispatcher.Invoke(() => CommandManager.InvalidateRequerySuggested());           
+            Application.Current.Dispatcher.Invoke(() => CommandManager.InvalidateRequerySuggested());
         }
 
         public string connectedTeensy => iFace?.teensyID;
-        public void Dispose() => iFace?.Dispose();
-
-        //private void doStart(object o) => iFace.cmdStart("");
-        //private void doStop(object o) => iFace.cmdStop();
+        public void Dispose()
+        {
+            iFace?.Dispose();
+        }
+     
         private readonly IFace iFace;
     }
 }
