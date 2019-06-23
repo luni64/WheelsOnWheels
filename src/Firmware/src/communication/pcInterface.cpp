@@ -45,7 +45,7 @@ void setParams()
 void startBot()
 {
     hardware::eggController.stopDrawing();
-    hardware::eggController.drawFunction(&f, 1.2, 35000);
+    hardware::eggController.drawFunction(&f, 1.2, 50000);
 }
 
 void stopBot()

@@ -15,6 +15,9 @@ namespace ViewModel
 
         public RelayCommand cmdStart { get; private set; }
         public RelayCommand cmdStop { get; private set; }
+        
+
+        public SimulatorVM simVM { get; private set; }
 
         public FarrisFuncVM farrisFuncVM { get; }
         public List<DataPoint> functionValues { get; } = new List<DataPoint>();
@@ -22,10 +25,11 @@ namespace ViewModel
 
         public MainVM()
         {
-            cmdStop = new RelayCommand(o => iFace?.cmdStop(), o => iFace?.isOpen ?? false);
-            cmdStart = new RelayCommand(o => iFace?.cmdStart(farrisFuncVM.paramString), o => iFace?.isOpen ?? false);
-
             farrisFuncVM = new FarrisFuncVM(functionValues);
+
+            cmdStop = new RelayCommand(o => iFace?.cmdStop(), o => iFace?.isOpen ?? false);
+            cmdStart = new RelayCommand(o => iFace?.cmdStart(farrisFuncVM.paramString), o => iFace?.isOpen ?? false);            
+
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))   // avoid to open a port in the XAML designer! It will never release it...
             {

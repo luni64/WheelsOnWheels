@@ -7,12 +7,16 @@
         xmlns:local="clr-namespace:WheelsOverWheels"
         xmlns:vm="clr-namespace:ViewModel"
         mc:Ignorable="d"
-        Title="{Binding title, Mode=OneWay}" Height="800" Width="1100" Closed="Close_Closed">
-    
+        Title="{Binding title, Mode=OneWay}" Height="680" Width="1100" Closed="Close_Closed">
+
     <Window.DataContext>
         <vm:MainVM/>
     </Window.DataContext>
-    
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
     <Grid x:Name="grid" Margin="25">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -78,6 +82,50 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20   "/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--<Label Content="Command:" Grid.Column="0" Grid.Row="1"/>
+                <Label Content="{Binding farrisFuncVM.paramString}" Grid.Column="1" Grid.Row="1"/>
+                --><!--<TextBlock Text="{Binding teensyVM.response}" Grid.Row="2" Grid.ColumnSpan="2"/>-->
+
+
+
+            </Grid>
+        </Border>
+
+        <!--<oxy:Plot x:Name="plot" Grid.Column="1" Grid.Row="1"  Width="380" Height="380" PlotAreaBorderThickness="0" >
+            <oxy:Plot.Axes>
+                <oxy:LinearAxis Position="Top" IsAxisVisible="False" Maximum="{Binding farrisFuncVM.max}" Minimum="{Binding farrisFuncVM.min}"/>
+                <oxy:LinearAxis Position="Right" IsAxisVisible="False" Maximum="{Binding farrisFuncVM.max, Mode=OneWay}" Minimum="{Binding farrisFuncVM.min}"/>
+            </oxy:Plot.Axes>
+            <oxy:Plot.Series>
+                <oxy:LineSeries ItemsSource="{Binding functionValues}" Color="#FFC76C6C" />
+                -->
+        <!--<oxy:LineSeries ItemsSource="{Binding f.motorValues}" Color="blue" MarkerType="Circle" MarkerSize="5" MarkerStrokeThickness="1" MarkerStroke="Blue" LineStyle="None"/>-->
+        <!--
+            </oxy:Plot.Series>
+            <oxy:Plot.Clip>
+                <EllipseGeometry  RadiusX="190" RadiusY="190" Center="190  ,190" />
+            </oxy:Plot.Clip>
+        </oxy:Plot>
+        <Ellipse Grid.Column="1" Grid.Row="1" Width="380" Height="380" Stroke="#CCA1C1F3" StrokeThickness="2.5"/>-->
+
+        <Border Grid.Row="0" Grid.Column="1" CornerRadius="10" Grid.RowSpan="3"  BorderThickness="2" BorderBrush="#FF9FC0EE"  Margin="0,10,20,0" Padding="5"  Width="380" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="370"/>
+                    <RowDefinition Height="auto "/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -85,33 +133,54 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Teensy:" Grid.Column="0" Grid.Row="0"  />
-                <Label Content="{Binding connectedTeensy}" Grid.Column="1" Grid.Row="0"  />               
-                <Label Content="Command:" Grid.Column="0" Grid.Row="1"/>
-                <Label Content="{Binding farrisFuncVM.paramString}" Grid.Column="1" Grid.Row="1"/>
-                <!--<TextBlock Text="{Binding teensyVM.response}" Grid.Row="2" Grid.ColumnSpan="2"/>-->
 
-                <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="0,0,10,0" >
-                    <Button Content="Start"  Margin="20,5,5,5" Width="50" Command="{Binding cmdStart, Mode=OneWay}"/>
-                    <Button Content="Stop"   Margin="20,5,5,5" Command="{Binding cmdStop, Mode=OneWay}"  />
+                <oxy:Plot x:Name="simPlot" Grid.Column="0" Grid.Row="0" PlotAreaBorderThickness="0" Grid.ColumnSpan="3"  >
+                    <oxy:Plot.Axes>
+                        <oxy:LinearAxis IsAxisVisible="False" Maximum="{Binding farrisFuncVM.simMax}" Minimum="{Binding farrisFuncVM.simMin}"  Position="Top" IsZoomEnabled="False" IsPanEnabled="False"/>
+                        <oxy:LinearAxis IsAxisVisible="False" Maximum="{Binding farrisFuncVM.simMax}" Minimum="{Binding farrisFuncVM.simMin}" Position="Right" IsZoomEnabled="False" IsPanEnabled="False"/>
+                    </oxy:Plot.Axes>
+                    <oxy:Plot.Series>
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[6]}" Color="#FFC76C6C" StrokeThickness="1" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"   />
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[7]}" LineStyle="None"  MarkerType="Circle" MarkerFill="#FFC76C6C" MarkerSize="3" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"  />
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[4]}" Color="Green" StrokeThickness="1" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"  />
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[5]}" LineStyle="None"  MarkerType="Circle" MarkerFill="Green" MarkerSize="3" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"  />
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[2]}" Color="Blue" StrokeThickness="1" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"  />
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[3]}" LineStyle="None"  MarkerType="Circle" MarkerFill="Blue" MarkerSize="3" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"  />
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[0]}" Color="DarkGray" StrokeThickness="1" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"  />
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[1]}" LineStyle="None"  MarkerType="Circle" MarkerFill="DarkGray" MarkerSize="3" Visibility="{Binding farrisFuncVM.showWheels, Converter={StaticResource BoolToVis}}"   />
+
+                        <oxy:LineSeries ItemsSource="{Binding farrisFuncVM.simdata[8]}" Color="#FFC76C6C" StrokeThickness="2.5"  Visibility="{Binding farrisFuncVM.showGraph, Converter={StaticResource BoolToVis}}" />
+
+                        <oxy:LineSeries ItemsSource="{Binding f.motorValues}" Color="blue" MarkerType="Circle" MarkerSize="5" MarkerStrokeThickness="1" MarkerStroke="Blue" LineStyle="None"/>
+                    </oxy:Plot.Series>
+                    <!--<oxy:Plot.Clip>
+                        <EllipseGeometry  RadiusX="190" RadiusY="190" Center="190  ,190" />
+                    </oxy:Plot.Clip>-->
+                </oxy:Plot>
+                <!--<Ellipse Grid.Column="1" Grid.Row="1" Width="380" Height="380" Stroke="#CCA1C1F3" StrokeThickness="2.5"/>-->
+
+                <CheckBox Content="Show Wheels" Grid.Row="1" Grid.Column="0"  Margin="0,0,10,0"  IsChecked="{Binding farrisFuncVM.showWheels}" />
+                <CheckBox Content="Show Graph" Grid.Row="1" Grid.Column="1" IsChecked="{Binding farrisFuncVM.showGraph}" />
+
+                <Separator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"  Margin="15,20"/>
+
+                <CheckBox Content="Simulate" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+                <Slider Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Value="{Binding farrisFuncVM.ts}" Maximum="1.1" TickFrequency="0.1" SmallChange="0.005" LargeChange="0.075" TickPlacement="BottomRight"  />
+                <StackPanel Grid.Column="2" Grid.Row="3" Margin="20,0,10,0" >
+                    <Button Content="Start" Width="50" Margin="0,0,0,5" Command="{Binding farrisFuncVM.cmdStartSim, Mode=OneWay}" />
+                    <Button Content="Stop" Width="50" Margin="0,5,0,0" Command="{Binding farrisFuncVM.cmdStopSim, Mode=OneWay}" />
+                </StackPanel>
+                <Separator Margin="15,20,15,10" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" />
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Label Content="EggBot:"/>
+                        <Label Content="{Binding connectedTeensy}" Width="150" Margin="10,0,0,0"  />                    
                 </StackPanel>
 
+                <StackPanel Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="5" Margin="0,5,10,10" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Content="Start" Width="50" Margin="0,0,0,2" Command="{Binding cmdStart, Mode=OneWay}" />
+                    <Button Content="Stop" Width="50" Margin="0,2,0,0" Command="{Binding cmdStop, Mode=OneWay}" />                    
+                </StackPanel>
             </Grid>
         </Border>
-        
-        <oxy:Plot x:Name="plot" Grid.Column="1" Grid.Row="1"  Width="380" Height="380" PlotAreaBorderThickness="0" >
-            <oxy:Plot.Axes>
-                <oxy:LinearAxis Position="Top" IsAxisVisible="False" Maximum="{Binding farrisFuncVM.max}" Minimum="{Binding farrisFuncVM.min}"/>
-                <oxy:LinearAxis Position="Right" IsAxisVisible="False" Maximum="{Binding farrisFuncVM.max, Mode=OneWay}" Minimum="{Binding farrisFuncVM.min}"/>
-            </oxy:Plot.Axes>
-            <oxy:Plot.Series>
-                <oxy:LineSeries ItemsSource="{Binding functionValues}" Color="#FFC76C6C" />
-                <!--<oxy:LineSeries ItemsSource="{Binding f.motorValues}" Color="blue" MarkerType="Circle" MarkerSize="5" MarkerStrokeThickness="1" MarkerStroke="Blue" LineStyle="None"/>-->
-            </oxy:Plot.Series>
-            <oxy:Plot.Clip>
-                <EllipseGeometry  RadiusX="190" RadiusY="190" Center="190  ,190" />
-            </oxy:Plot.Clip>
-        </oxy:Plot>
-        <Ellipse Grid.Column="1" Grid.Row="1" Width="380" Height="380" Stroke="#CCA1C1F3" StrokeThickness="2.5"/>
     </Grid>
 </Window>

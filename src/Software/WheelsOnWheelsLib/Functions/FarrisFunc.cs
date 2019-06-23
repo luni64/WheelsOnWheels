@@ -10,13 +10,13 @@ namespace Functions
         {
             new FarrisWheel("Wheel 1") { freq = 1, r = 1 },
             new FarrisWheel("Wheel 2") { freq = 7, r = 0.5 },
-            new FarrisWheel("Wheel 3") { freq = -17, r = 0.33, phi0 = -90 },
+            new FarrisWheel("Wheel 3") { freq = -17, r = 0.33, phi0 = Math.PI/2 },
             new FarrisWheel("Wheel 4") { freq = 19, r = 0 }
         };
 
         public List<(double x, double y)> calculate(double t_0, double t_e, double dt)
         {
-            if (t_e <= t_0 || dt <= 0) throw (new ArgumentException());
+            if (t_e < t_0 || dt <= 0) throw (new ArgumentException());
 
             var result = new List<(double x, double y)>();
             for (double t = t_0; t < t_e; t += dt)

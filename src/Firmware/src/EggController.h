@@ -9,7 +9,7 @@ class EggController
 public:
     inline EggController(EggBot &eggBot);
 
-    inline void drawFunction(ParametricFunction *f, float size = 1.0f, unsigned samplePeriod = 50000);
+    inline void drawFunction(ParametricFunction *f, float size = 1.0f, unsigned samplePeriod = 35000);
     inline void stopDrawing();
 
     inline void tick();

@@ -21,6 +21,6 @@ void loop()
     sw = 0;
     float r, phi;
     hardware::eggBot.getPosition(&r, &phi);
-    Serial.printf("%.4f %.4f\n", r, phi);
+    //Serial.printf("%.4f %.4f\n", r, phi);
   }
 }

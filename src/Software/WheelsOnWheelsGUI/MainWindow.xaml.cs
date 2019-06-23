@@ -24,12 +24,28 @@ namespace WheelsOverWheels
         public MainWindow()
         {
             InitializeComponent();
-            (DataContext as MainVM).farrisFuncVM.PropertyChanged += (s, e) => plot.InvalidatePlot(true);
+            (DataContext as MainVM).farrisFuncVM.PropertyChanged += FarrisFuncVM_PropertyChanged;
         }
-        
+
+        private void FarrisFuncVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "values":
+                    //plot.InvalidatePlot(true);
+                    break;
+                case "simData":
+                    simPlot.InvalidatePlot(true);
+                    break;
+            }
+        }
+
         private void Close_Closed(object sender, EventArgs e)
         {
             (DataContext as MainVM)?.Dispose();
         }
+
+
+
     }
 }

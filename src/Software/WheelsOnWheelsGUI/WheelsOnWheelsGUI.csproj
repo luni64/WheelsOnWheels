@@ -73,6 +73,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\IfaceVM.cs" />
     <Compile Include="ViewModels\FarrisFuncVM.cs" />
+    <Compile Include="ViewModels\SimulatorVM.cs" />
     <Compile Include="ViewModels\WheelParamVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
